@@ -4,4 +4,8 @@ headers = {
     'Authorization': 'Bearer 376f0a25129fda22f7fc44398757efc7',
 }
 
+# Lister les plannings
+
+# Lister les créneaux
+
 response = requests.post('https://shiftheroes.fr/api/v1/plannings/LQfrZg/shifts/3kFq5dY/reservations', headers=headers)
