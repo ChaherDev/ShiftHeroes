@@ -1,6 +1,6 @@
 import Foundation
 
-let url = URL(string: "https://shiftheroes.fr/api/v1/plannings/LQfrZg/shifts/3kFq5dY/reservations")!
+let url = URL(string: "https://shiftheroes.fr/api/v1/plannings/LQfrZg/shifts/OAF6DPq/reservations")!
 let headers = [
     "Authorization": "Bearer 376f0a25129fda22f7fc44398757efc7"
 ]
