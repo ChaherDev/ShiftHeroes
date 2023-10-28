@@ -26,7 +26,13 @@ identifiant_nouveau_planning = nouvelle_liste[0]["id"]
 # C'est pas évident car l'identifiant est dans une variable, à nous de savoir comment mettre une
 # variable dans une chaîne de caractères (interpolation)
 
-response = requests.get('https://shiftheroes.fr/api/v1/plannings/'+ identifiant_nouveau_planning +'/shifts', headers=headers)
-print(response.json())
+liste_creneaux = requests.get('https://shiftheroes.fr/api/v1/plannings/'+ identifiant_nouveau_planning +'/shifts', headers=headers)
+print(liste_creneaux.json())
 
 # Maintenant il faudrait que pour chacun de ces créneaux, l'on fasse une réservation
+
+
+
+for creneaux in liste_creneaux:
+    identifiant_nouveau_crenaux = liste_creneaux[creneaux]["id"]
+    requests.post('https://shiftheroes.fr/api/v1/plannings/LQfrZg/shifts/'+ identifiant_nouveau_crenauxneaux +'/reservations')
