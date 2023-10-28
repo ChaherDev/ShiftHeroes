@@ -14,25 +14,26 @@ nouvelle_liste = requests.get('https://shiftheroes.fr/api/v1/plannings?type=dail
 
 while liste_initiale == nouvelle_liste:
     nouvelle_liste = requests.get('https://shiftheroes.fr/api/v1/plannings?type=daily', headers=headers).json()
+    print(".", end="", flush=True)
     time.sleep(1)
 
 print("Nouveau planning disponible !")
 
-# On récupère l'identifiant du planning qui a changé
+# L'identifiant du planning qui a changé
 
-identifiant_nouveau_planning = nouvelle_liste[0]["id"]
+print(nouvelle_liste[0]["id"])
 
 # La suite il faut récupérer la liste des crénneaux de ce nouveau planning en utilisant l'identifiant
 # C'est pas évident car l'identifiant est dans une variable, à nous de savoir comment mettre une
 # variable dans une chaîne de caractères (interpolation)
 
-liste_creneaux = requests.get('https://shiftheroes.fr/api/v1/plannings/'+ identifiant_nouveau_planning +'/shifts', headers=headers)
-print(liste_creneaux.json())
+liste_creneaux = requests.get('https://shiftheroes.fr/api/v1/plannings/'+ nouvelle_liste[0]["id"] +'/shifts', headers=headers).json()
+print(liste_creneaux)
 
 # Maintenant il faudrait que pour chacun de ces créneaux, l'on fasse une réservation
 
+for creneau in liste_creneaux:
+    requests.post('https://shiftheroes.fr/api/v1/plannings/' + nouvelle_liste[0]["id"] + '/shifts/' + creneau["id"] + '/reservations', headers=headers)
+    time.sleep(0.2)
 
-
-for creneaux in liste_creneaux:
-    identifiant_nouveau_crenaux = liste_creneaux[creneaux]["id"]
-    requests.post('https://shiftheroes.fr/api/v1/plannings/LQfrZg/shifts/'+ identifiant_nouveau_crenauxneaux +'/reservations')
+print("Réservation effectuée !")
