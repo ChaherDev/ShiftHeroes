@@ -1,8 +1,13 @@
 import requests
 import time
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 headers = {
-    'Authorization': 'Bearer 376f0a25129fda22f7fc44398757efc7',
+    'Authorization': f'Bearer {os.getenv("API_KEY")}',
 }
 
 liste_initiale = requests.get('https://shiftheroes.fr/api/v1/plannings?type=daily', headers=headers).json()
